@@ -1,8 +1,8 @@
 {
   "camelcase": true,
+  "eqeqeq": true,
   "curly": true,
   "immed": true,
-  "indent": 4,
   "latedef": true,
   "newcap": true,
   "noarg": true,
@@ -12,7 +12,13 @@
   "trailing": true,
 
   "boss": true,
+  "eqnull": true,
+  "expr": true,
 
+  "node": true,
   "browser": true,
-  "jquery": true
+  "jquery": true,
+  "globals": {
+    "Zepto": true
+  }
 }
