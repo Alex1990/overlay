@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Embedded</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div>
+            <button id="open">Open</button>
+        </div>
+        <div class="intro">
+            <p>Click on the overlay to close it.</p>
+            <p class="division">Or</p>
+            <p>Test it on a smartphone.</p>
+        </div>
+        <div id="qrcode" class="qrcode"></div>
+    </div>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+    <script src="../src/overlay.js"></script>
+    <script>
+        $(function(){
+            // A simple overlay
+            var overlay = new Overlay({
+                parent: '#qrcode'
+            });
+
+            $('#open').click(function(){
+                overlay.open();
+            });
+
+            // Generate a qrcode
+            $('#qrcode').qrcode(window.location.href);
+        });
+    </script>
+</body>
+</html>

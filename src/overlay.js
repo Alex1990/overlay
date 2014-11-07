@@ -1,10 +1,16 @@
+/*!
+ * overlay
+ * http://alex1990.github.com/overlay
+ */
 ;(function($){
+
+    'use strict';
 
     var $win = $(window),
         $doc = $(document);
 
     // Default settings
-    var defaults = $.fn.overlay.defaults = {
+    var defaults = $.fn.overlayDefaults = {
         name: '',
         closeOnClick: true,
         parent: document.body,
@@ -12,7 +18,7 @@
         openDuration: 250,
         closeDuration: 150,
         backgroundColor: '#000',
-        opacity: 0.35,
+        opacity: 0.6,
         zIndex: 100,
     };
 
@@ -31,23 +37,24 @@
     Overlay.prototype.init = function(opts){
         this.opts = opts = $.extend({}, this.opts, opts);
 
-        this.eventPrefix = opts.name + (opts.name || '.');
+        this.eventPrefix = opts.name + (opts.name ? '.' : '');
 
-        var parentPosition = $(opts.parent).css('position');
+        var $parent = $(opts.parent),
+            parentPosition = $(opts.parent).css('position');
 
         if ((parentPosition === 'auto' || parentPosition === 'static') &&
-                $(opts.parent).get(0) !== document.body) {
-            $(opts.parent).css('position', 'relative');
+                $parent.get(0) !== document.body) {
+            $parent.css('position', 'relative');
         }
 
-        this.$el = $('<div class="overlay"></div>');
+        this.$el = $('<div class="overlay' + (opts.name ? ' ' + opts.name + '-overlay' : '') + '"></div>');
         this.$el.css({
+            display: 'none',
             position: 'absolute',
             top: 0,
             left: 0,
             right: 0,
             bottom: 0,
-            visibility: 'hidden',
             backgroundColor: opts.backgroundColor,
             opacity: opts.opacity,
             zIndex: opts.zIndex
@@ -64,8 +71,8 @@
         // resize and orientationchange
         $win.on('resize', function(){
             self.$el.css({
-                width: $doc.width(),
-                height: $doc.height()
+                width: $(self.opts.parent).width(),
+                height: $(self.opts.parent).height()
             });
         });
 
@@ -135,7 +142,7 @@
         }
     };
 
-    // Expose to global
+    // Export Overlay into global scope
     window.Overlay = Overlay;
 
 })(jQuery || Zepto);

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Ajax with spin</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div>
+            <button id="send">Send</button>
+        </div>
+        <div class="intro">
+            <p>When start to send an ajax request, open the overlay and spin.</p>
+            <p>When the request is received, close the overlay and spin.</p>
+        </div>
+        <div id="qrcode" class="qrcode"></div>
+    </div>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/spin.js/2.0.1/spin.min.js"></script>
+    <script src="../src/overlay.js"></script>
+    <script>
+        $(function(){
+
+            // Assume an overlay in a function private scope.
+            var ajaxLoading = function(){
+
+                var overlay = new Overlay({
+                    closeOnClick: false,
+                    opacity: 0.6
+                });
+
+                // A spinner
+                var spinner = new Spinner({
+                    color: '#fff'
+                }).spin(overlay.$el.parent().get(0));
+
+                var $spinner = $(spinner.el)
+
+                $spinner.hide();
+
+                $(document).on('overlay.afteropen', function(){
+                    $spinner.show();
+                });
+                $(document).on('overlay.beforeclose', function(){
+                    $spinner.hide();
+                });
+            };
+            ajaxLoading();
+
+            $('#send').click(function(){
+
+                // You can trigger the `overlay.open` event to open the overlay.
+                $(document).trigger('overlay.open');
+
+                setTimeout(function(){
+                    $.ajax({
+                        type: 'GET',
+                        url: 'http://demo.ckan.org/api/3/action/package_show?id=adur_district_spending',
+                        cache: false,
+                        error: function(){
+                            // You can also close the overlay by triggering the `overlay.close` event.
+                            $(document).trigger('overlay.close');
+                        },
+                        success: function(result){
+                            console && console.log(result);
+                            $(document).trigger('overlay.close');
+                        }
+                    });
+                }, 2000);
+            });
+
+            // Generate a qrcode
+            $('#qrcode').qrcode(window.location.href);
+        });
+    </script>
+</body>
+</html>
