@@ -1,12 +1,14 @@
 overlay
 =======
 
-A lightweight and flexible jquery/zepto plugin to show an overlay in the page. [http://alex1990.github.io/overlay](http://alex1990.github.io/overlay) **Work in process**
+A lightweight and flexible jQuery/Zepto plugin to show an overlay in the page. 
+
+Documents and examples see: [http://alex1990.github.io/overlay](http://alex1990.github.io/overlay).
 
 Usage
 -----
 
-It's ease to use it. Just like the below code: 
+It's easy to use it. As the below code: 
 
 ```js
 $(function(){
