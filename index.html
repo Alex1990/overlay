@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Overlay - A Simple And Flexible Overlay jQuery/Zepto Plugin</title>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/styles/github.min.css">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <style>
+        /* base */
+        ::selection {
+            background-color: #eee;
+        }
+        body {
+            margin: 0;
+            font: 16px/1.6 Helvetica, Arial, Microsoft Yahei, sans-serif;
+            background-color: #fff;
+            color: #333;
+        }
+        a {
+            text-decoration: none;
+            color: #06d;
+        }
+        a:hover {
+            text-decoration: underline;
+            color: #07f;
+        }
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        code {
+            padding: 0 3px;
+            font-family: consolas, monospace;
+            background-color: #f0f0f0;
+            border: 1px solid #eaeaea;
+            border-radius: 3px;
+        }
+        pre {
+            line-height: 1.4;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+        }
+        pre code {
+            background: none;
+            border: 0;
+        }
+        .fl {
+            float: left;
+        }
+        .fr {
+            float: right;
+        }
+        .cf:after {
+            content: ' ';
+            display: block;
+            clear: both;
+        }
+        .wrapper {
+            width: 960px;
+            margin: 0 auto;
+        }
+        .fixed {
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+        /* header */
+        .header {
+            background-color: #333;
+        }
+        .nav li {
+            float: left;
+        }
+        .nav li a {
+            display: block;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: #aaa;
+        }
+        .nav li a:hover {
+            color: #fff;
+        }
+        /* subhead */
+        .subhead {
+            margin-top: 40px;
+            background-color: #a85;
+            color: #fff;
+            overflow: hidden;
+        }
+        .subhead h1 {
+            font-size: 3.5em;
+            margin: 20px 0 10px;
+            text-shadow: 0 2px 4px #777;
+        }
+        .subhead p {
+            margin: 20px 0;
+            text-shadow: 0 1px 2px #777;
+            font-size: 24px;
+        }
+        .download {
+            text-align: center;
+        }
+        .download a {
+            display: inline-block;
+            padding: 5px 20px;
+            text-decoration: none;
+            font-size: 20px;
+            background-color: #222;
+            color: #fff;
+        }
+        .download a:hover {
+            background-color: #333;
+        }
+        .divider-bar {
+            margin-top: 40px;
+            height: 40px;
+            background-color: #eee;
+            border-bottom: 1px solid #ddd;
+        }
+        /* content */
+        .content .wrapper {
+            width: 800px;
+        }
+        .content h2 {
+            font-size: 2em;
+            border-bottom: 1px solid #ddd;
+        }
+        .content h3 {
+            font-size: 1.5em;
+        }
+        .content ul {
+            list-style-type: disc;
+            padding-left: 1.5em;
+        }
+        .content .nav-anchor {
+            margin-top: -20px;
+            padding-top: 40px;
+        }
+        .content .api-list span {
+            margin-right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <header class="header fixed">
+            <div class="wrapper">
+                <nav class="nav cf">
+                    <ul class="fr cf">
+                        <li><a href="#usage">Usage</a></li>
+                        <li><a href="#examples">Examples</a></li>
+                        <li><a href="#options">Options</a></li>
+                        <li><a href="#api">API</a></li>
+                        <li><a href="#browser-support">Browser Support</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <div class="subhead">
+            <div class="wrapper">
+                <h1>Overlay</h1>
+                <p>A simple and flexible jQuery/Zepto plugin to generate an overlay/mask layer.</p>
+                <p class="download"><a href="">Download</a></p>
+            </div>
+            <div class="divider-bar"></div>
+        </div>
+        <div class="content">
+            <div class="wrapper">
+                <h2 id="usage" class="nav-anchor">Usage</h2>
+                <p>It's ease to use it. Just like the below code:</p>
+<pre><code>$(function(){
+    // By default, overlay is hidden.
+    var overlay = new Overlay();
+});
+</code></pre>
+                    <p>The above code will generate an element:</p>
+<pre><code>&lt;div class="overlay"&gt;&lt;/div&gt;
+</code></pre>
+                    <p>Custom style:</p>
+<pre><code>$(function(){
+    var overlay = new Overlay({
+        backgroundColor: '#fff',
+        opacity: 0.5,
+        zIndex: 999
+});
+</code></pre>
+                <h2 id="examples" class="nav-anchor">Examples</h2>
+                <ul>
+                    <li><a href="example/default.html">Default</a></li>
+                    <li><a href="example/custom-style.html">Custom style</a></li>
+                    <li><a href="example/no-effect.html">No effect</a></li>
+                    <li><a href="example/not-respond-to-click">Not respond to click</a></li>
+                    <li><a href="example/ajax-with-spin.html">Ajax with spin</a></li>
+                    <li><a href="example/event-and-class-prefix">Event and class prefix</a></li>
+                </ul>
+                <h2 id="options" class="nav-anchor">Options</h2>
+                <p>An option object can be accepted when you instantiate an Overlay instance, Which includes the below properties.</p>
+                <ul class="api-list">
+                    <li>
+                        <h4>backgroundColor</h4>
+                        <p><span>Type: String</span><span>Default: <code>'#000'</code></span></p>
+                        <p>Set the <code>background-color</code> property of the overlay element.</p>
+                    </li>
+                    <li>
+                        <h4>closeDuration</h4>
+                        <p><span>Type: Number (unit: ms)</span><span>Default: <code>150</code></span></p>
+                        <p>It only works in the <code>'fade'</code> effect.</p>
+                    </li>
+                    <li>
+                        <h4>closeOnClick</h4>
+                        <p><span>Type: Boolean</span><span>Default: <code>true</code></span></p>
+                        <p>When it's set true, you can click the overlay element to close it.</p>
+                    </li>
+                    <li>
+                        <h4>effect</h4>
+                        <p><span>Type: String (only 'none' or 'fade')</span><span>Default: <code>'fade'</code></span></p>
+                        <p>At present, only <code>'none'</code> and <code>'fade'</code> effect are supported.</p>
+                    </li>
+                    <li>
+                        <h4>name</h4>
+                        <p><span>Type: String</span><span>Default: <code>''</code></span></p>
+                        <p>It mainly controls the prefix of <a href="#events">Events</a> and <a href="#listeners">Listeners</a>. For example, if it's set to <code>'ajax'</code>, the <code>ajax.overlay.open</code> event will be trigger on the document when open the overlay. And the overlay element will be added a class named <code>ajax-overlay</code>.</p>
+                    </li>
+                    <li>
+                        <h4>opacity</h4>
+                        <p><span>Type: Number</span><span>Default: <code>0.6</code></span></p>
+                        <p>Set the <code>opacity</code> property of the overlay element.</p>
+                    </li>
+                    <li>
+                        <h4>openDuration</h4>
+                        <p><span>Type: Number (unit: ms)</span><span>Default: <code>250</code></span></p>
+                        <p>It only works in the <code>'fade'</code> effect.</p>
+                    </li>
+                    <li>
+                        <h4>parent</h4>
+                        <p><span>Type: Element|jQuery Selector|jQuery Object</span><span>Default:<code>document.body</code></span></p>
+                        <p>The overlay element will be append to this element.</p>
+                    </li>
+                    <li>
+                        <h4>zIndex</h4>
+                        <p><span>Type: Number</span><span>Default: <code>100</code></span></p>
+                        <p>Set the <code>z-index</code> property of the overlay element.</p>
+                    </li>
+                </ul>
+                <h2 id="api" class="nav-anchor">API</h2>
+                <h3 id="properties">Properties</h3>
+                <ul class="api-list">
+                    <li>
+                        <h4>$el</h4>
+                        <p>An jQuery/Zepto object represent the generated overlay element.</p>
+                    </li>
+                    <li>
+                        <h4>isClosed</h4>
+                        <p>Indicate the overlay whether is opened or closed.</p>
+                    </li>
+                </ul>
+                <h3 id="methods">Methods</h3>
+                <ul class="api-list">
+                    <li>
+                        <h4>open()</h4>
+                        <p>Show the overlay.</p>
+                    </li>
+                    <li>
+                        <h4>close()</h4>
+                        <p>Hide the overlay.</p>
+                    </li>
+                    <li>
+                        <h4>destroy()</h4>
+                        <p>Remove the overlay element and remove the listeners on <code>document</code>.</p>
+                    </li>
+                </ul>
+                <h3 id="events">Events</h3>
+                <p>The value of eventPrefix will be <code>options.name + '.'</code>.</p>
+                <ul class="api-list">
+                    <li>
+                        <h4>[eventPrefix]overlay.beforeopen</h4>
+                        <p>This event will be triggered on the document before the overlay shown.</p>
+                    </li>
+                    <li>
+                        <h4>[eventPrefix]overlay.afteropen</h4>
+                        <p>This event will be triggered on the document after the overlay shown.</p>
+                    </li>
+                    <li>
+                        <h4>[eventPrefix]overlay.beforeclose</h4>
+                        <p>This event will be triggered on the document before the overlay hidden.</p>
+                    </li>
+                    <li>
+                        <h4>[eventPrefix]overlay.afterclose</h4>
+                        <p>This event will be triggered on the document after the overlay hidden.</p>
+                    </li>
+                </ul>
+                <h3 id="listeners">Listeners</h3>
+                <p>The value of eventPrefix will be <code>options.name + '.'</code>.</p>
+                <ul class="api-list">
+                    <li>
+                        <h4>[eventPrefix]overlay.open</h4>
+                        <p>When this event is triggered on the document, the overlay will be shown.</p>
+                    </li>
+                    <li>
+                        <h4>[eventPrefix]overlay.close</h4>
+                        <p>When this event is triggered on the document, the overlay will be hidden.</p>
+                    </li>
+                </ul>
+                <h2 id="browser-support" class="nav-anchor">Browser Support</h2>
+                <p>It depends on what the jQuery/Zepto supports.</p>
+                <h2 id="license">License</h2>
+                <p>Under the MIT License.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
