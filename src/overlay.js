@@ -2,24 +2,24 @@
  * overlay
  * http://alex1990.github.com/overlay
  */
-;(function($){
+;(function(global, $){
 
     'use strict';
 
-    var $win = $(window),
+    var $win = $(global),
         $doc = $(document);
 
     // Default settings
     var defaults = $.fn.overlayDefaults = {
-        name: '',
-        closeOnClick: true,
-        parent: document.body,
-        effect: 'fade',
-        openDuration: 250,
-        closeDuration: 150,
         backgroundColor: '#000',
+        closeDuration: 150,
+        closeOnClick: true,
+        effect: 'fade',
+        name: '',
         opacity: 0.6,
-        zIndex: 100,
+        openDuration: 250,
+        parent: document.body,
+        zIndex: 100
     };
 
     // The constructor
@@ -143,6 +143,6 @@
     };
 
     // Export Overlay into global scope
-    window.Overlay = Overlay;
+    global.Overlay = Overlay;
 
-})(jQuery || Zepto);
+})(window, jQuery || Zepto);
