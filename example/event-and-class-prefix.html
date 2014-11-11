@@ -11,7 +11,7 @@
         <div>
             <button id="send">Send</button>
         </div>
-        <div class="intro">
+        <div class="intro hide">
             <p>When start to send an ajax request, open the overlay and spin.</p>
             <p>When the request is received, close the overlay and spin.</p>
             <p>All events have a prefix which is <code>options.name</code> followed by a hyphen.</p>
@@ -21,6 +21,7 @@
         <div id="qrcode" class="qrcode"></div>
     </div>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-browser/0.0.6/jquery.browser.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/spin.js/2.0.1/spin.min.js"></script>
     <script src="../src/overlay.js"></script>
@@ -32,8 +33,7 @@
 
                 var overlay = new Overlay({
                     name: 'ajax',
-                    closeOnClick: false,
-                    opacity: 0.6
+                    closeOnClick: false
                 });
 
                 // A spinner
@@ -76,8 +76,13 @@
                 }, 2000);
             });
 
-            // Generate a qrcode
-            $('#qrcode').qrcode(window.location.href);
+            $('.intro').show();
+
+            if (!$.browser.msie ||
+                    ($.browser.msie && $.browser.versionNumber > 8)) {
+                // Generate a qrcode
+                $('#qrcode').qrcode(window.location.href);
+            }
         });
     </script>
 </body>
