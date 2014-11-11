@@ -16,7 +16,7 @@
             <p class="division">Or</p>
             <p>Test it on a smartphone.</p>
         </div>
-        <div id="qrcode" class="qrcode">Here</div>
+        <div id="qrcode" class="qrcode"></div>
     </div>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-browser/0.0.6/jquery.browser.min.js"></script>
@@ -41,6 +41,7 @@
                 $('#qrcode').qrcode(window.location.href);
             } else {
                 $('.intro > p:first').siblings().hide();
+                $('#qrcode').append('Here');
                 $('#qrcode').css({
                     margin: '0 auto',
                     width: '200px',
