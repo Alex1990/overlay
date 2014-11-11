@@ -1,7 +1,7 @@
 overlay
 =======
 
-A lightweight and flexible jQuery/Zepto plugin to show an overlay in the page. 
+A lightweight and flexible jQuery/Zepto plugin to show an overlay in the page.
 
 Documents and examples see: [http://alex1990.github.io/overlay](http://alex1990.github.io/overlay).
 
@@ -17,7 +17,7 @@ $(function(){
 })
 ```
 
-The above code will generate an element: `&lt;div class="overlay"&gt;&lt;/div&gt`.
+The above code will generate an element: `<div class="overlay"></div>`.
 
 Custom style:
 
@@ -36,7 +36,7 @@ More introduction and examples see: [http://alex1990.github.io/overlay](http://a
 Issues
 ------
 
-If you come cross a bug or a usage prolem, welcome to submit a issue in here:
+If you come cross a bug or a usage prolem, welcome to submit an issue in here:
 [https://github.com/Alex1990/overlay/issues](https://github.com/Alex1990/overlay/issues)
 
 License
