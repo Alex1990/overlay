@@ -36,7 +36,7 @@ More introduction and examples see: [http://alex1990.github.io/overlay](http://a
 Issues
 ------
 
-If you come cross a bug or a usage prolem, welcome to submit an issue in here:
+If you come cross a bug or a usage problem, welcome to submit an issue in here:
 [https://github.com/Alex1990/overlay/issues](https://github.com/Alex1990/overlay/issues)
 
 License
