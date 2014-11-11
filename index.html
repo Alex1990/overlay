@@ -1,13 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]-->
+<!--[if lt IE 8]> <html class="no-js lt-ie9 lt-ie8"><![endif]-->
+<!--[if lt IE 9]> <html class="no-js lt-ie9"><![endif]-->
+<!--[if gt IE 8]><!--><html><!--<![endif]-->
 <head>
     <meta charset="UTF-8">
     <title>Overlay - A Simple And Flexible Overlay jQuery/Zepto Plugin</title>
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/styles/github.min.css">
+    <!--[if lt IE 9]>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
     <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/highlight.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
+    <!--<![endif]-->
     <style>
         /* base */
+        ::-moz-selection {
+            background-color: #eee;
+        }
         ::selection {
             background-color: #eee;
         }
@@ -46,6 +57,10 @@
             background: none;
             border: 0;
         }
+        .lt-ie9 pre {
+            padding: 10px;
+            background-color: #f8f8f8;
+        }
         .fl {
             float: left;
         }
@@ -66,6 +81,9 @@
             top: 0;
             width: 100%;
         }
+        .lt-ie7 .fixed {
+            position: static;
+        }
         /* header */
         .header {
             background-color: #333;
@@ -78,16 +96,20 @@
             padding: 10px 20px;
             text-decoration: none;
             color: #aaa;
+            outline: none;
         }
         .nav li a:hover {
             color: #fff;
         }
         /* subhead */
         .subhead {
-            margin-top: 40px;
+            padding-top: 40px;
             background-color: #a85;
             color: #fff;
             overflow: hidden;
+        }
+        .lt-ie7 .subhead {
+            padding-top: 0;
         }
         .subhead h1 {
             font-size: 3.5em;
@@ -176,27 +198,27 @@
 <pre><code>$(function(){
     // By default, overlay is hidden.
     var overlay = new Overlay();
-});
-</code></pre>
+});</code></pre>
                     <p>The above code will generate an element:</p>
-<pre><code>&lt;div class="overlay"&gt;&lt;/div&gt;
-</code></pre>
-                    <p>Custom style:</p>
+<pre><code>&lt;div class="overlay"&gt;&lt;/div&gt;</code></pre>
+                    <p>Both calling the <code>open()</code> method and triggering the <code>overlay.open</code> event on the document will make the overlay element shown.</p>
+                    <p>Likewise, both calling the <code>close()</code> method and triggering the <code>overlay.close</code> event on the document will make the overlay element hidden.</p>
+                    <p><strong>Custom style:</strong></p>
 <pre><code>$(function(){
     var overlay = new Overlay({
         backgroundColor: '#fff',
         opacity: 0.5,
         zIndex: 999
-});
-</code></pre>
+});</code></pre>
                 <h2 id="examples" class="nav-anchor">Examples</h2>
                 <ul>
                     <li><a href="example/default.html">Default</a></li>
                     <li><a href="example/custom-style.html">Custom style</a></li>
                     <li><a href="example/no-effect.html">No effect</a></li>
-                    <li><a href="example/not-respond-to-click">Not respond to click</a></li>
+                    <li><a href="example/embeded.html">Embeded</a></li>
+                    <li><a href="example/not-respond-to-click.html">Not respond to click</a></li>
                     <li><a href="example/ajax-with-spin.html">Ajax with spin</a></li>
-                    <li><a href="example/event-and-class-prefix">Event and class prefix</a></li>
+                    <li><a href="example/event-and-class-prefix.html">Event and class prefix</a></li>
                 </ul>
                 <h2 id="options" class="nav-anchor">Options</h2>
                 <p>An option object can be accepted when instantiate an Overlay instance, Which includes the below properties:</p>
@@ -219,12 +241,12 @@
                     <li>
                         <h4>effect</h4>
                         <p><span>Type: String (only 'none' or 'fade')</span><span>Default: <code>'fade'</code></span></p>
-                        <p>At present, only <code>'none'</code> and <code>'fade'</code> effect are supported.</p>
+                        <p>At present, only <code>'none'</code> and <code>'fade'</code> effects are supported.</p>
                     </li>
                     <li>
                         <h4>name</h4>
                         <p><span>Type: String</span><span>Default: <code>''</code></span></p>
-                        <p>It mainly controls the prefix of <a href="#events">Events</a> and <a href="#listeners">Listeners</a>. For example, if it's set to <code>'ajax'</code>, the <code>ajax.overlay.open</code> event will be trigger on the document when open the overlay. And the overlay element will be added a class named <code>ajax-overlay</code>.</p>
+                        <p>It mainly controls the prefix of <a href="#events">Events</a> and <a href="#listeners">Listeners</a>. For example, if it's set to <code>'ajax'</code>, you can open the overlay by triggering the <code>ajax.overlay.open</code> event on the document. And the overlay element will be added a class named <code>ajax-overlay</code>.</p>
                     </li>
                     <li>
                         <h4>opacity</h4>
@@ -271,11 +293,11 @@
                     </li>
                     <li>
                         <h4>destroy()</h4>
-                        <p>Remove the overlay element and remove the listeners on <code>document</code>.</p>
+                        <p>Remove the overlay element from the DOM and remove the listeners on <code>document</code>.</p>
                     </li>
                 </ul>
                 <h3 id="events">Events</h3>
-                <p>The value of eventPrefix will be <code>options.name + '.'</code>.</p>
+                <p>The value of <code>eventPrefix</code> will be <code>options.name + '.'</code>.</p>
                 <ul class="api-list">
                     <li>
                         <h4>[eventPrefix]overlay.beforeopen</h4>
@@ -295,7 +317,7 @@
                     </li>
                 </ul>
                 <h3 id="listeners">Listeners</h3>
-                <p>The value of eventPrefix will be <code>options.name + '.'</code>.</p>
+                <p>The value of <code>eventPrefix</code> will be <code>options.name + '.'</code>.</p>
                 <ul class="api-list">
                     <li>
                         <h4>[eventPrefix]overlay.open</h4>
@@ -308,10 +330,18 @@
                 </ul>
                 <h2 id="browser-support" class="nav-anchor">Browser Support</h2>
                 <p>It depends on what the jQuery/Zepto supports.</p>
+                <p><strong>Note:</strong> If you're using Zepto, then the <a href="https://github.com/madrobby/zepto/blob/master/src/fx.js#files">fx</a> module must be included.</p>
                 <h2 id="license">License</h2>
                 <p>Under the <a href="https://github.com/Alex1990/overlay/blob/master/LICENSE">MIT License.</a></p>
             </div>
         </div>
     </div>
+    <script>
+        // Remove the dotted outline in IE
+        var anchors = document.getElementsByTagName('a');
+        for (var i = 0, len = anchors.length; i < len; i++) {
+            anchors[i].hideFocus = true;
+        }
+    </script>
 </body>
 </html>
