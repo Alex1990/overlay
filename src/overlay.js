@@ -6,8 +6,7 @@
 
     'use strict';
 
-    var $win = $(global),
-        $doc = $(document);
+    var $doc = $(document);
 
     // Default settings
     var defaults = $.fn.overlayDefaults = {
@@ -68,14 +67,6 @@
     Overlay.prototype.bindEvents = function(){
         var self = this;
 
-        // resize and orientationchange
-        $win.on('resize', function(){
-            self.$el.css({
-                width: $(self.opts.parent).width(),
-                height: $(self.opts.parent).height()
-            });
-        });
-
         self.opts.closeOnClick && self.$el.on('click', function(){
             self.close();
         });
@@ -127,7 +118,15 @@
             afterCallback.call(this);
         },
         fade: function(afterCallback){
-            this.$el.fadeIn(this.opts.openDuration, $.proxy(afterCallback, this));
+            var self = this;
+            self.$el.css({
+                display: 'block',
+                opacity: 0
+            }).animate({
+                opacity: self.opts.opacity
+            }, this.opts.openDuration, function(){
+                afterCallback.call(self);
+            });
         }
     };
 
@@ -138,7 +137,13 @@
             afterCallback.call(this);
         },
         fade: function(afterCallback){
-            this.$el.fadeOut(this.opts.closeDuration, $.proxy(afterCallback, this));
+            var self = this;
+            self.$el.animate({
+                opacity: 0
+            }, this.opts.closeDuration, function(){
+                $(this).hide();
+                afterCallback.call(self);
+            });
         }
     };
 

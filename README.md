@@ -29,6 +29,7 @@ $(function(){
         zIndex: 999
 });
 ```
+**Note:** If you're using Zepto, then the [fx](https://github.com/madrobby/zepto/blob/master/src/fx.js#files) module must be included.
 
 More introduction and examples see: [http://alex1990.github.io/overlay](http://alex1990.github.io/overlay)
 
