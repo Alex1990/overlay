@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Close On Tap</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div>
+            <button id="open">Tap to Open</button>
+        </div>
+        <div class="intro hide">
+            <p>Tap on the overlay to close it. (Use the Zepto's touch.js)</p>
+            <p>Because of Zepto, open this page on IE10+ and other modern browsers.</p>
+        </div>
+        <div id="qrcode" class="qrcode"></div>
+    </div>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/zepto/1.1.4/zepto.min.js"></script>
+    <script src="js/zepto.fx.js"></script>
+    <script src="js/zepto.touch.js"></script>
+    <script src="js/qrcode.min.js"></script>
+    <script src="../src/overlay.js"></script>
+    <script>
+        $(function(){
+
+            // A simple overlay
+            var overlay = new Overlay({
+                closeOnEvent: 'tap',
+                opacity: 0.4
+            });
+
+            $('#open').tap(function(e){
+                overlay.open();
+            });
+
+            $('.intro').show();
+
+            new QRCode($('#qrcode').get(0), location.href);
+        });
+    </script>
+</body>
+</html>
