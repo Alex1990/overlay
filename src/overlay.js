@@ -12,7 +12,7 @@
     var defaults = $.fn.overlayDefaults = {
         backgroundColor: '#000',
         closeDuration: 150,
-        closeOnClick: true,
+        closeOnEvent: 'click',
         effect: 'fade',
         name: '',
         opacity: 0.6,
@@ -23,6 +23,12 @@
 
     // The constructor
     function Overlay(opts) {
+
+        // This check is only for backward compatibility
+        if (opts && opts.closeOnClick === false) {
+            opts.closeOnEvent = false;
+        }
+
         this.opts = opts = $.extend({}, defaults, opts);
 
         this.eventPrefix = '';
@@ -65,9 +71,10 @@
 
     // Bind some useful events
     Overlay.prototype.bindEvents = function(){
-        var self = this;
+        var self = this,
+            eventName = self.opts.closeOnEvent;
 
-        self.opts.closeOnClick && self.$el.on('click', function(){
+        eventName && self.$el.on(eventName, function(){
             self.close();
         });
 
@@ -150,4 +157,4 @@
     // Export Overlay into global scope
     global.Overlay = Overlay;
 
-})(window, jQuery || Zepto);
+})(window, this.jQuery || this.Zepto);
