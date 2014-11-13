@@ -187,7 +187,7 @@
             <div class="wrapper">
                 <h1>Overlay</h1>
                 <p>A lightweight and flexible jQuery/Zepto plugin to generate an overlay/mask layer.</p>
-                <p class="download"><a href="https://github.com/Alex1990/overlay/archive/0.1.2.zip">Download <span class="filesize">(819B min+gzip)</span></a></p>
+                <p class="download"><a href="https://github.com/Alex1990/overlay/archive/0.1.2.zip">Download <span class="filesize">(853B min+gzip)</span></a></p>
             </div>
             <div class="divider-bar"></div>
         </div>
@@ -217,6 +217,7 @@
                     <li><a href="example/no-effect.html">No effect</a></li>
                     <li><a href="example/embeded.html">Embeded</a></li>
                     <li><a href="example/not-respond-to-click.html">Not respond to click</a></li>
+                    <li><a href="example/close-on-tap.html">Close on tap</a></li>
                     <li><a href="example/ajax-with-spin.html">Ajax with spin</a></li>
                     <li><a href="example/event-and-class-prefix.html">Event and class prefix</a></li>
                 </ul>
@@ -234,9 +235,11 @@
                         <p>It only works for the <code>'fade'</code> effect.</p>
                     </li>
                     <li>
-                        <h4>closeOnClick</h4>
-                        <p><span>Type: Boolean</span><span>Default: <code>true</code></span></p>
-                        <p>When it's set true, you can click the overlay element to close it.</p>
+                        <h4>closeOnEvent</h4>
+                        <p><span>Type: Boolean | String</span><span>Default: <code>'click'</code></span></p>
+                        <p>When the event assigned by this option is triggered on the overlay element, it will be closed. 
+                            When this option is set to <code>false</code> or empty string, none listener is bound on the overlay element.</p>
+                        <p>The former similar option <code>closeOnClick</code> is deprecated.</p>
                     </li>
                     <li>
                         <h4>effect</h4>
