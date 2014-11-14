@@ -32,11 +32,17 @@ button:hover {
 button::-moz-focus-inner {
     border: 0;
 }
+.intro {
+    width: 720px;
+    margin: 0 auto;
+}
 .intro p {
     font-size: 20px;
+    line-height: 32px;
     color: #666;
 }
 .intro p.division {
+    margin: 10px 0;
     font-size: 28px;
     font-weight: 700;
     color: #aaa;
@@ -46,6 +52,10 @@ button::-moz-focus-inner {
     margin: 0 auto;
 }
 @media only screen and (max-width: 640px) {
+    .intro {
+        width: 80%;
+        padding: 0 5%;
+    }
     .intro p:not(:first-child),
     .qrcode {
         display: none;
