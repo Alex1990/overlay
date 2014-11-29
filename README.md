@@ -33,6 +33,23 @@ $(function(){
 
 More introduction and examples see: [http://alex1990.github.io/overlay](http://alex1990.github.io/overlay)
 
+Packages
+--------
+
+You can use `npm` or `bower` to install it.
+
+**NPM:**
+
+```bash
+npm install simple-overlay
+```
+
+**Bower:**
+
+```bash
+bower install simple-overlay
+```
+
 Issues
 ------
 
