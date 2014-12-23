@@ -45,10 +45,10 @@
 
                 $spinner.hide();
 
-                $(document).on('ajax.overlay.afteropen', function(){
+                $(document).on('ajax:overlay:afteropen', function(){
                     $spinner.show();
                 });
-                $(document).on('ajax.overlay.beforeclose', function(){
+                $(document).on('ajax:overlay:beforeclose', function(){
                     $spinner.hide();
                 });
             };
@@ -57,7 +57,7 @@
             $('#send').click(function(){
 
                 // You can trigger the `overlay.open` event to open the overlay.
-                $(document).trigger('ajax.overlay.open');
+                $(document).trigger('ajax:overlay:open');
 
                 setTimeout(function(){
                     $.ajax({
@@ -66,11 +66,11 @@
                         cache: false,
                         error: function(){
                             // You can also close the overlay by triggering the `overlay.close` event.
-                            $(document).trigger('ajax.overlay.close');
+                            $(document).trigger('ajax:overlay:close');
                         },
                         success: function(result){
                             console && console.log(result);
-                            $(document).trigger('ajax.overlay.close');
+                            $(document).trigger('ajax:overlay:close');
                         }
                     });
                 }, 2000);

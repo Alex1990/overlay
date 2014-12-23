@@ -43,7 +43,7 @@
             $(document).on('touchstart', function(){
                 $log.html('');
                 $log.append('<p>touchstart: ' + (+new Date()) + '</p>');
-            }).on('overlay.beforeclose', function(){
+            }).on('overlay:beforeclose', function(){
                 $log.append('<p>beforeclose: ' + (+new Date()) + '</p>');
             });
 

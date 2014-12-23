@@ -43,7 +43,7 @@
         // Initialize an `Overlay` instance
         init: function(opts){
             this.opts = opts = $.extend({}, this.opts, opts);
-            this.eventPrefix = opts.name + (opts.name ? '.' : '');
+            this.eventPrefix = opts.name + (opts.name ? ':' : '');
 
             var $parent = $(opts.parent),
                 parentPosition = $(opts.parent).css('position');
@@ -82,10 +82,10 @@
                 self.close();
             });
 
-            $doc.on(self.eventPrefix + 'overlay.open', function(){
+            $doc.on(self.eventPrefix + 'overlay:open', function(){
                 self.open();
             });
-            $doc.on(self.eventPrefix + 'overlay.close', function(){
+            $doc.on(self.eventPrefix + 'overlay:close', function(){
                 self.close();
             });
 
@@ -95,11 +95,11 @@
         open: function(){
             var self = this;
 
-            $doc.trigger(self.eventPrefix + 'overlay.beforeopen');
+            $doc.trigger(self.eventPrefix + 'overlay:beforeopen');
 
             Overlay.openEffects[self.opts.effect].call(self, function(){
                 this.isClosed = false;
-                $doc.trigger(this.eventPrefix + 'overlay.afteropen');
+                $doc.trigger(this.eventPrefix + 'overlay:afteropen');
             });
         },
 
@@ -107,11 +107,11 @@
         close: function(){
             var self = this;
 
-            $doc.trigger(self.eventPrefix + 'overlay.beforeclose');
+            $doc.trigger(self.eventPrefix + 'overlay:beforeclose');
 
             Overlay.closeEffects[self.opts.effect].call(self, function(){
                 this.isClosed = true;
-                $doc.trigger(this.eventPrefix + 'overlay.afterclose');
+                $doc.trigger(this.eventPrefix + 'overlay:afterclose');
             });
 
         },
@@ -122,9 +122,9 @@
                 eventPrefix = self.eventPrefix;
 
             self.$el.remove();
-            $doc.off(eventPrefix + 'overlay.open');
-            $doc.off(eventPrefix + 'overlay.close');
-            $doc.trigger(eventPrefix + 'overlay.removed');
+            $doc.off(eventPrefix + 'overlay:open');
+            $doc.off(eventPrefix + 'overlay:close');
+            $doc.trigger(eventPrefix + 'overlay:removed');
         }
     });
 
