@@ -42,10 +42,10 @@
 
                 $spinner.hide();
 
-                $(document).on('overlay.afteropen', function(){
+                $(document).on('overlay:afteropen', function(){
                     $spinner.show();
                 });
-                $(document).on('overlay.beforeclose', function(){
+                $(document).on('overlay:beforeclose', function(){
                     $spinner.hide();
                 });
             };
@@ -53,8 +53,8 @@
 
             $('#send').click(function(){
 
-                // You can trigger the `overlay.open` event to open the overlay.
-                $(document).trigger('overlay.open');
+                // You can trigger the `overlay:open` event to open the overlay.
+                $(document).trigger('overlay:open');
 
                 setTimeout(function(){
                     $.ajax({
@@ -62,12 +62,12 @@
                         url: 'http://demo.ckan.org/api/3/action/package_show?id=adur_district_spending',
                         cache: false,
                         error: function(){
-                            // You can also close the overlay by triggering the `overlay.close` event.
-                            $(document).trigger('overlay.close');
+                            // You can also close the overlay by triggering the `overlay:close` event.
+                            $(document).trigger('overlay:close');
                         },
                         success: function(result){
                             console && console.log(result);
-                            $(document).trigger('overlay.close');
+                            $(document).trigger('overlay:close');
                         }
                     });
                 }, 2000);
