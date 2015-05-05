@@ -17,7 +17,7 @@ $(function(){
 })
 ```
 
-The above code will generate an element: `<div class="overlay"></div>`.
+The above code will create an element: `<div class="overlay"></div>`.
 
 Custom style:
 
