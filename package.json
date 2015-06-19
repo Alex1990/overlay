@@ -1,7 +1,8 @@
 {
   "name": "simple-overlay",
+  "version": "0.1.8",
   "description": "A simple jquery/zepto plugin to show an overlay",
-  "version": "0.1.7",
+  "main": "src/overlay.js",
   "author": {
     "name": "Alex Chao",
     "email": "alexchao1990@gmail.com"
